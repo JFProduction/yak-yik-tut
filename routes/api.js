@@ -46,4 +46,25 @@ router.get('/:resource/:id', (req, res, next) => {
     }
 })
 
+router.post('/:resource', (req, res, next) => {
+    let resource = req.params.resource
+
+    if (resource === 'zone') {
+        ZoneController.create(req.body, (err, result) => {
+            if (err) {
+                res.json({
+                    status: 500,
+                    msg: err
+                })
+                return
+            }
+
+            res.json({
+                status: 200,
+                result: result
+            })
+        })
+    }
+})
+
 module.exports = router
