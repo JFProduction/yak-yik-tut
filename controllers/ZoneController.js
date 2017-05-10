@@ -54,7 +54,14 @@ module.exports = {
         })
     },
 
-    destroy: () => {
+    destroy: (id, callback) => {
+        Zone.findByIdAndRemove(id, (err) => {
+            if (err) {
+                callback(err, null)
+                return
+            }
 
+            callback(null, null)
+        })
     }
 }
