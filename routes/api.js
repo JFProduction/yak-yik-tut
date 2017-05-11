@@ -68,7 +68,7 @@ router.post('/:resource', (req, res, next) => {
         })
         return
     }
-    
+
     controller.create(req.body, (err, result) => {
         if (err) {
             res.json({
@@ -81,6 +81,34 @@ router.post('/:resource', (req, res, next) => {
         res.json({
             status: 200,
             result: result
+        })
+    })
+})
+
+router.delete('/:resource', (req, res, next) => {
+    let resource = req.params.resource
+    let id = req.params.id
+    let controller = controllers[resource]
+    if (controller == null) {
+        res.json({
+            status: 500,
+            msg: 'Invalid Resource Request: ' + resource 
+        })
+        return
+    }
+
+    controller.destroy(id, (err, result) => {
+        if (err) {
+            res.json({
+                status: 500,
+                msg: err
+            })
+            return
+        }
+
+        res.json({
+            status: 200,
+            result: null
         })
     })
 })

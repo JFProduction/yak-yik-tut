@@ -10,4 +10,8 @@ router.get('/createzone', function(req, res, next) {
   res.render('createzone', { title: 'Create Zone' });
 });
 
+router.get('/createcomment', function(req, res, next) {
+  res.render('createcomment', { title: 'Create Comment' });
+});
+
 module.exports = router;
