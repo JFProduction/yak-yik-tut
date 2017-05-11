@@ -1,6 +1,5 @@
 var express = require('express'),
     router = express.Router(),
-    ZoneController = require('../controllers/ZoneController'),
     controllers = require('../controllers')
 
 router.get('/:resource', (req, res, next) => {
