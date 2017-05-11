@@ -4,6 +4,10 @@ body {
 }
 
 a {
+  color: #FF5252;
+}
+
+a:hover {
   color: #00B7FF;
 }
 
