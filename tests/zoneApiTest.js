@@ -28,19 +28,19 @@ function getZoneById(id) {
     })
 }
 
-// describe('create a zone', function() {
-//     it('should return an success', function(done) {
-//         request.post({ url: 'http://localhost:3000/api/zone', 
-//                      data: JSON.stringify({
-//                          name: 'third zone',
-//                          zipCodes: ['1']
-//                      }) 
-//                 },
-//             (err, resp, body) => {
-//                 let zone = JSON.parse(body)
-//                 expect(zone.status).to.equal(200)
-//                 expect(zone.name).to.equal('third zone')
-//                 done()
-//             })
-//     })
-// })
+describe('create a zone', function() {
+    it('should return an success', function(done) {
+        request.post({ url: 'http://localhost:3000/api/zone', 
+                     data: JSON.stringify({
+                         name: 'third zone',
+                         zipCodes: ['75550']
+                     }) 
+                },
+            (err, resp, body) => {
+                let zone = JSON.parse(body)
+                expect(zone.status).to.equal(200)
+                expect(zone.name).to.equal('third zone')
+                done()
+            })
+    })
+})

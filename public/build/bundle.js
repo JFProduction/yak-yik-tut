@@ -9540,6 +9540,10 @@ var _reactDom = __webpack_require__(80);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _Zones = __webpack_require__(182);
+
+var _Zones2 = _interopRequireDefault(_Zones);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9563,7 +9567,12 @@ var App = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                'Hello React!'
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Hello React!'
+                ),
+                _react2.default.createElement(_Zones2.default, null)
             );
         }
     }]);
@@ -22059,6 +22068,171 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(81);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Zones = function (_Component) {
+    _inherits(Zones, _Component);
+
+    function Zones() {
+        _classCallCheck(this, Zones);
+
+        return _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).apply(this, arguments));
+    }
+
+    _createClass(Zones, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "ol",
+                    null,
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            null,
+                            _react2.default.createElement(
+                                "h2",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#" },
+                                    "Zone 1"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "75039"
+                            ),
+                            _react2.default.createElement("br", null),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "10 Comments"
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            null,
+                            _react2.default.createElement(
+                                "h2",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#" },
+                                    "Zone 2"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "75038"
+                            ),
+                            _react2.default.createElement("br", null),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "11 Comments"
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            null,
+                            _react2.default.createElement(
+                                "h2",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#" },
+                                    "Zone 3"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "33569"
+                            ),
+                            _react2.default.createElement("br", null),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "No Comments"
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "li",
+                        null,
+                        _react2.default.createElement(
+                            "div",
+                            null,
+                            _react2.default.createElement(
+                                "h2",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "#" },
+                                    "Zone 4"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "75039"
+                            ),
+                            _react2.default.createElement("br", null),
+                            _react2.default.createElement(
+                                "span",
+                                null,
+                                "3 Comments"
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Zones;
+}(_react.Component);
+
+exports.default = Zones;
 
 /***/ })
 /******/ ]);
