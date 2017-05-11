@@ -1,7 +1,7 @@
 var webpack = require('webpack'),
     path = require('path')
 
-module.expors = {
+module.exports = {
     entry: {
         app: './src/app.js'
     },
@@ -15,7 +15,7 @@ module.expors = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     presets: ['react', 'es2015']
                 }
