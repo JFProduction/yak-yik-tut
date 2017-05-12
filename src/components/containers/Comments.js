@@ -12,8 +12,44 @@ class Comments extends Component {
                 { body: 'Something', username: 'billy', timestamp: '05/11/2017 10:40PM' },
                 { body: 'This is new', username: 'bobby', timestamp: '05/12/2017 09:24AM' },
                 { body: 'Again, hello worlds!', username: 'fred', timestamp: '05/15/2017 11:03AM' }
-            ]
+            ],
+            comment: {
+                username: '',
+                body: '',
+                timestamp: ''
+            }
         }
+    }
+
+    submitComment(e) {
+        console.log(JSON.stringify(this.state.comment, null, 3))
+    }
+
+    updateUsername(e) {
+        let updatedComment = Object.assign({}, this.state.comment)
+        updatedComment.username = e.target.value
+
+        this.setState({ 
+            comment: updatedComment
+        })
+    }
+
+    updateBody(e) {
+        let updatedComment = Object.assign({}, this.state.comment)
+        updatedComment.body = e.target.value
+
+        this.setState({
+            comment: updatedComment
+        })
+    }
+
+    updateTimestamp(e) {
+        let updatedComment = Object.assign({}, this.state.comment)
+        updatedComment.timestamp = e.target.value
+
+        this.setState({
+            comment: updatedComment
+        })
     }
 
     render() {
@@ -32,6 +68,11 @@ class Comments extends Component {
                     <ul style={ styles.comments.commentListItem }>
                         { commentItems }
                     </ul>
+
+                    <input onChange={ this.updateUsername.bind(this) } className="form-control" type="text" placeholder="Username" /><br />
+                    <input onChange={ this.updateBody.bind(this) } className="form-control" type="text" placeholder="Comment" /><br />
+                    <input onChange={ this.updateTimestamp.bind(this) } className="form-control" type="text" placeholder="Timestamp" /><br />
+                    <button className="btn btn-info" onClick={ this.submitComment.bind(this) }>Submit Comment</button>
                 </div>
             </div>
         )

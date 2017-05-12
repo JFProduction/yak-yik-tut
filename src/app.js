@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom'
 import Home from './components/layouts/Home'
 
 class App extends Component {
-    
     render() {
         return (
-            <div>
+            <div className="container">
                 <h1>YakYik!</h1>
                 <Home />
             </div>

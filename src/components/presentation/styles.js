@@ -32,7 +32,8 @@ export default {
         infoContainer: { marginBottom: 15 },
         bodyWrapper: { 
             fontSize: 20, 
-            fontWeight: 400 
+            fontWeight: 400,
+            marginBottom: 2
         },
         textWrapper: { fontWeight: 200 },
         pipeWrapper: { marginLeft: 12, marginRight: 12 }
