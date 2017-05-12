@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from '../styles'
+import styles from './styles'
 
 class ZoneInfo extends Component {
     render() {

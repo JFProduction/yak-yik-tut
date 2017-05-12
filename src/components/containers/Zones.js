@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ZoneInfo from '../previews/ZoneInfo'
+import ZoneInfo from '../presentation/ZoneInfo'
 
 class Zones extends Component {
     constructor() {

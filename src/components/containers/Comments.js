@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import CommentInfo from '../previews/CommentInfo'
-import styles from '../styles'
+import CommentInfo from '../presentation/CommentInfo'
+import styles from './styles'
 
 class Comments extends Component {
     constructor() {

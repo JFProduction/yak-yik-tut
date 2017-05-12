@@ -9586,55 +9586,7 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ }),
 /* 84 */,
 /* 85 */,
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-    universal: {},
-    zoneInfo: {
-        container: {
-            padding: 15,
-            background: '#eee',
-            width: 300,
-            marginBottom: 10,
-            border: '1px solid #ddd'
-        },
-        header: {
-            marginBottom: 3,
-            marginTop: 0
-        },
-        zoneName: {
-            textDecoration: 'none'
-        },
-        detail: {
-            font: 12,
-            color: '#555'
-        }
-    },
-    comments: {
-        container: {
-            padding: 12,
-            background: '#eee',
-            border: '1px solid #ddd'
-        },
-        commentListItem: { listStyle: 'none' },
-        infoContainer: { marginBottom: 15 },
-        bodyWrapper: {
-            fontSize: 20,
-            fontWeight: 400
-        },
-        textWrapper: { fontWeight: 200 },
-        pipeWrapper: { marginLeft: 12, marginRight: 12 }
-    }
-};
-
-/***/ }),
+/* 86 */,
 /* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22211,11 +22163,11 @@ var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CommentInfo = __webpack_require__(191);
+var _CommentInfo = __webpack_require__(193);
 
 var _CommentInfo2 = _interopRequireDefault(_CommentInfo);
 
-var _styles = __webpack_require__(86);
+var _styles = __webpack_require__(196);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -22295,7 +22247,7 @@ var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ZoneInfo = __webpack_require__(192);
+var _ZoneInfo = __webpack_require__(194);
 
 var _ZoneInfo2 = _interopRequireDefault(_ZoneInfo);
 
@@ -22350,7 +22302,9 @@ var Zones = function (_Component) {
 exports.default = Zones;
 
 /***/ }),
-/* 191 */
+/* 191 */,
+/* 192 */,
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22366,7 +22320,7 @@ var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(86);
+var _styles = __webpack_require__(195);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -22424,7 +22378,7 @@ var CommentInfo = function (_Component) {
 exports.default = CommentInfo;
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22440,7 +22394,7 @@ var _react = __webpack_require__(25);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _styles = __webpack_require__(86);
+var _styles = __webpack_require__(195);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -22497,6 +22451,104 @@ var ZoneInfo = function (_Component) {
 }(_react.Component);
 
 exports.default = ZoneInfo;
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    universal: {},
+    zoneInfo: {
+        container: {
+            padding: 15,
+            background: '#eee',
+            width: 300,
+            marginBottom: 10,
+            border: '1px solid #ddd'
+        },
+        header: {
+            marginBottom: 3,
+            marginTop: 0
+        },
+        zoneName: {
+            textDecoration: 'none'
+        },
+        detail: {
+            font: 12,
+            color: '#555'
+        }
+    },
+    comments: {
+        container: {
+            padding: 12,
+            background: '#eee',
+            border: '1px solid #ddd'
+        },
+        commentListItem: { listStyle: 'none' },
+        infoContainer: { marginBottom: 15 },
+        bodyWrapper: {
+            fontSize: 20,
+            fontWeight: 400
+        },
+        textWrapper: { fontWeight: 200 },
+        pipeWrapper: { marginLeft: 12, marginRight: 12 }
+    }
+};
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    universal: {},
+    zoneInfo: {
+        container: {
+            padding: 15,
+            background: '#eee',
+            width: 300,
+            marginBottom: 10,
+            border: '1px solid #ddd'
+        },
+        header: {
+            marginBottom: 3,
+            marginTop: 0
+        },
+        zoneName: {
+            textDecoration: 'none'
+        },
+        detail: {
+            font: 12,
+            color: '#555'
+        }
+    },
+    comments: {
+        container: {
+            padding: 12,
+            background: '#eee',
+            border: '1px solid #ddd'
+        },
+        commentListItem: { listStyle: 'none' },
+        infoContainer: { marginBottom: 15 },
+        bodyWrapper: {
+            fontSize: 20,
+            fontWeight: 400
+        },
+        textWrapper: { fontWeight: 200 },
+        pipeWrapper: { marginLeft: 12, marginRight: 12 }
+    }
+};
 
 /***/ })
 /******/ ]);
