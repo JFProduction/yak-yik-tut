@@ -9757,7 +9757,7 @@ var Comments = function (_Component) {
 
     _createClass(Comments, [{
         key: 'submitComment',
-        value: function submitComment(e) {
+        value: function submitComment() {
             var updatedList = Object.assign([], this.state.list);
             updatedList.push(this.state.comment);
 
@@ -9766,30 +9766,10 @@ var Comments = function (_Component) {
             });
         }
     }, {
-        key: 'updateUsername',
-        value: function updateUsername(e) {
+        key: 'updateComment',
+        value: function updateComment(e) {
             var updatedComment = Object.assign({}, this.state.comment);
-            updatedComment.username = e.target.value;
-
-            this.setState({
-                comment: updatedComment
-            });
-        }
-    }, {
-        key: 'updateBody',
-        value: function updateBody(e) {
-            var updatedComment = Object.assign({}, this.state.comment);
-            updatedComment.body = e.target.value;
-
-            this.setState({
-                comment: updatedComment
-            });
-        }
-    }, {
-        key: 'updateTimestamp',
-        value: function updateTimestamp(e) {
-            var updatedComment = Object.assign({}, this.state.comment);
-            updatedComment.timestamp = e.target.value;
+            updatedComment[e.target.id] = e.target.value;
 
             this.setState({
                 comment: updatedComment
@@ -9822,11 +9802,11 @@ var Comments = function (_Component) {
                         { style: _styles2.default.comments.commentListItem },
                         commentItems
                     ),
-                    _react2.default.createElement('input', { onChange: this.updateUsername.bind(this), className: 'form-control', type: 'text', placeholder: 'Username' }),
+                    _react2.default.createElement('input', { id: 'username', onChange: this.updateComment.bind(this), className: 'form-control', type: 'text', placeholder: 'Username' }),
                     _react2.default.createElement('br', null),
-                    _react2.default.createElement('input', { onChange: this.updateBody.bind(this), className: 'form-control', type: 'text', placeholder: 'Comment' }),
+                    _react2.default.createElement('input', { id: 'body', onChange: this.updateComment.bind(this), className: 'form-control', type: 'text', placeholder: 'Comment' }),
                     _react2.default.createElement('br', null),
-                    _react2.default.createElement('input', { onChange: this.updateTimestamp.bind(this), className: 'form-control', type: 'text', placeholder: 'Timestamp' }),
+                    _react2.default.createElement('input', { id: 'timestamp', onChange: this.updateComment.bind(this), className: 'form-control', type: 'text', placeholder: 'Timestamp' }),
                     _react2.default.createElement('br', null),
                     _react2.default.createElement(
                         'button',
@@ -9881,12 +9861,36 @@ var Zones = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
 
         _this.state = {
+            zone: {
+                name: '',
+                zipCode: ''
+            },
             list: [{ name: "Zone 1", zipCode: "75039", numOfComments: 10 }, { name: "Zone 2", zipCode: "75049", numOfComments: 20 }, { name: "Zone 3", zipCode: "33569", numOfComments: 14 }, { name: "Zone 4", zipCode: "33558", numOfComments: 1 }]
         };
         return _this;
     }
 
     _createClass(Zones, [{
+        key: 'addZone',
+        value: function addZone() {
+            var updatedList = Object.assign([], this.state.list);
+            updatedList.push(this.state.zone);
+
+            this.setState({
+                list: updatedList
+            });
+        }
+    }, {
+        key: 'updateZone',
+        value: function updateZone(e) {
+            var updatedZone = Object.assign({}, this.state.zone);
+            updatedZone[e.target.id] = e.target.value;
+
+            this.setState({
+                zone: updatedZone
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var zoneItems = this.state.list.map(function (zone, i) {
@@ -9904,6 +9908,15 @@ var Zones = function (_Component) {
                     'ol',
                     null,
                     zoneItems
+                ),
+                _react2.default.createElement('input', { id: 'name', className: 'form-control', onChange: this.updateZone.bind(this), type: 'text', placeholder: 'Name' }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { id: 'zipCode', className: 'form-control', onChange: this.updateZone.bind(this), type: 'text', placeholder: 'Zip Code' }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'btn btn-danger', onClick: this.addZone.bind(this) },
+                    'Submit Zone'
                 )
             );
         }

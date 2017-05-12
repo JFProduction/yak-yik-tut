@@ -21,7 +21,7 @@ class Comments extends Component {
         }
     }
 
-    submitComment(e) {
+    submitComment() {
         let updatedList = Object.assign([], this.state.list)
         updatedList.push(this.state.comment)
 
@@ -30,27 +30,9 @@ class Comments extends Component {
         })
     }
 
-    updateUsername(e) {
+    updateComment(e) {
         let updatedComment = Object.assign({}, this.state.comment)
-        updatedComment.username = e.target.value
-
-        this.setState({ 
-            comment: updatedComment
-        })
-    }
-
-    updateBody(e) {
-        let updatedComment = Object.assign({}, this.state.comment)
-        updatedComment.body = e.target.value
-
-        this.setState({
-            comment: updatedComment
-        })
-    }
-
-    updateTimestamp(e) {
-        let updatedComment = Object.assign({}, this.state.comment)
-        updatedComment.timestamp = e.target.value
+        updatedComment[e.target.id] = e.target.value
 
         this.setState({
             comment: updatedComment
@@ -74,9 +56,9 @@ class Comments extends Component {
                         { commentItems }
                     </ul>
 
-                    <input onChange={ this.updateUsername.bind(this) } className="form-control" type="text" placeholder="Username" /><br />
-                    <input onChange={ this.updateBody.bind(this) } className="form-control" type="text" placeholder="Comment" /><br />
-                    <input onChange={ this.updateTimestamp.bind(this) } className="form-control" type="text" placeholder="Timestamp" /><br />
+                    <input id="username" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Username" /><br />
+                    <input id="body" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Comment" /><br />
+                    <input id="timestamp" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Timestamp" /><br />
                     <button className="btn btn-info" onClick={ this.submitComment.bind(this) }>Submit Comment</button>
                 </div>
             </div>
