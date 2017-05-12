@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ZoneInfo from './ZoneInfo'
+import ZoneInfo from '../previews/ZoneInfo'
 
 class Zones extends Component {
     constructor() {
@@ -16,7 +16,7 @@ class Zones extends Component {
     }
 
     render() {
-        const listItems = this.state.list.map((zone, i) => {
+        const zoneItems = this.state.list.map((zone, i) => {
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
                     <ZoneInfo currentZone={ zone } />
@@ -25,9 +25,9 @@ class Zones extends Component {
         })
 
         return (
-            <div>
+            <div className="col-md-6">
                 <ol>
-                    { listItems }
+                    { zoneItems }
                 </ol>
             </div>
         )

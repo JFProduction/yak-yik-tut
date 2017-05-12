@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import styles from './styles'
+import styles from '../styles'
 
 class ZoneInfo extends Component {
     render() {
         const zoneStyle = styles.zoneInfo
         return (
-            <div style={ zoneStyle.zoneContainer }>
+            <div style={ zoneStyle.container }>
                 <h2 style={ zoneStyle.header }>
                     <a style={ zoneStyle.zoneName } href="#">
                         { this.props.currentZone.name }
