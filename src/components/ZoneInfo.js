@@ -11,8 +11,8 @@ class ZoneInfo extends Component {
                         { this.props.currentZone.name }
                     </a>
                 </h2>
-                <span className="detail">{ this.props.currentZone.zipCode }</span><br />
-                <span className="detail">{ this.props.currentZone.numOfComments } Comments</span>
+                <span className={ zoneStyle.detail }>{ this.props.currentZone.zipCode }</span><br />
+                <span className={ zoneStyle.detail }>{ this.props.currentZone.numOfComments } Comments</span>
             </div>
         )
     }

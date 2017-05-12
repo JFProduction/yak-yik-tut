@@ -9709,13 +9709,13 @@ var ZoneInfo = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'span',
-                    { className: 'detail' },
+                    { className: zoneStyle.detail },
                     this.props.currentZone.zipCode
                 ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'span',
-                    { className: 'detail' },
+                    { className: zoneStyle.detail },
                     this.props.currentZone.numOfComments,
                     ' Comments'
                 )
