@@ -7,9 +7,13 @@ class CommentInfo extends Component {
         return (
             <div style={ commentStyle.infoContainer }>
                 <p style={ commentStyle.bodyWrapper }>{ this.props.currentComment.body }</p>
-                <span style={ commentStyle.textWrapper }>{ this.props.currentComment.username }</span>
+                <span style={ commentStyle.textWrapper }>
+                    { this.props.currentComment.username }
+                </span>
                 <span style={ commentStyle.pipeWrapper }>|</span>
-                <span style={ commentStyle.textWrapper }>{ this.props.currentComment.timestamp }</span>
+                <span style={ commentStyle.textWrapper }>
+                    { this.props.currentComment.timestamp }
+                </span>
             </div>
         )
     }

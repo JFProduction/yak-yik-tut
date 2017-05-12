@@ -9758,7 +9758,12 @@ var Comments = function (_Component) {
     _createClass(Comments, [{
         key: 'submitComment',
         value: function submitComment(e) {
-            console.log(JSON.stringify(this.state.comment, null, 3));
+            var updatedList = Object.assign([], this.state.list);
+            updatedList.push(this.state.comment);
+
+            this.setState({
+                list: updatedList
+            });
         }
     }, {
         key: 'updateUsername',

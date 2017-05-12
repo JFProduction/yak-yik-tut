@@ -22,7 +22,12 @@ class Comments extends Component {
     }
 
     submitComment(e) {
-        console.log(JSON.stringify(this.state.comment, null, 3))
+        let updatedList = Object.assign([], this.state.list)
+        updatedList.push(this.state.comment)
+
+        this.setState({
+            list: updatedList
+        })
     }
 
     updateUsername(e) {
