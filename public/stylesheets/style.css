@@ -11,7 +11,7 @@ a:hover {
   color: #00B7FF;
 }
 
-ol li {
-  text-decoration: none;
-  list-style: none;
+.detail {
+  font: 12px;
+  color: #555;
 }
