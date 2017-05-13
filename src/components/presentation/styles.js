@@ -6,7 +6,6 @@ export default {
         container: { 
             padding: 15, 
             background: '#eee',
-            width: 300,
             marginBottom: 10,
             border: '1px solid #ddd'
         },
