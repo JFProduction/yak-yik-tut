@@ -24,7 +24,7 @@ class CreateComment extends Component {
 
     render() {
         return (
-            <div className="well">
+            <div>
                 <h3>Create Comment</h3>
                 <input onChange={ this.updateComment.bind(this) } id="username" className="form-control" type="text" placeholder="Username" /><br />
                 <input onChange={ this.updateComment.bind(this) } id="body" className="form-control" type="text" placeholder="Comment" /><br />

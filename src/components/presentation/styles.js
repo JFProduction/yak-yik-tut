@@ -1,11 +1,8 @@
 export default {
-    universal: {
-
-    },
     zoneInfo: {
         container: { 
             padding: 15, 
-            background: '#eee',
+            background: '#f9f9f9',
             marginBottom: 10,
             border: '1px solid #ddd'
         },
@@ -24,7 +21,7 @@ export default {
     comments: {
         container: {
             padding: 12, 
-            background: '#eee', 
+            background: '#f9f9f9', 
             border: '1px solid #ddd'
         },
         commentListItem: { listStyle: 'none' },

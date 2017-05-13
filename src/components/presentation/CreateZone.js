@@ -23,7 +23,7 @@ class CreateZone extends Component {
 
     render() {
         return (
-            <div className="well">
+            <div>
                 <h3>Create Zone</h3>
                 <input onChange={ this.updateZone.bind(this) } id="name" className="form-control" type="text" placeholder="Name" /><br />
                 <input onChange={ this.updateZone.bind(this) } id="zipCode" className="form-control" type="text" placeholder="Zip Code" /><br />

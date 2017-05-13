@@ -49,7 +49,7 @@ class Comments extends Component {
         const commentItems = this.state.list.map((comment, i) => {
             return (
                 <li key={ i }>
-                    <CommentInfo currentComment={ comment } />
+                    <CommentInfo currentComment={ comment } /><hr />
                 </li>
             )
         })

@@ -6705,11 +6705,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-    universal: {},
     zoneInfo: {
         container: {
             padding: 15,
-            background: '#eee',
+            background: '#f9f9f9',
             marginBottom: 10,
             border: '1px solid #ddd'
         },
@@ -6728,7 +6727,7 @@ exports.default = {
     comments: {
         container: {
             padding: 12,
-            background: '#eee',
+            background: '#f9f9f9',
             border: '1px solid #ddd'
         },
         commentListItem: { listStyle: 'none' },
@@ -10755,7 +10754,8 @@ var Comments = function (_Component) {
                 return _react2.default.createElement(
                     'li',
                     { key: i },
-                    _react2.default.createElement(_presentation.CommentInfo, { currentComment: comment })
+                    _react2.default.createElement(_presentation.CommentInfo, { currentComment: comment }),
+                    _react2.default.createElement('hr', null)
                 );
             });
 
@@ -10917,31 +10917,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-    universal: {},
-    zoneInfo: {
-        container: {
-            padding: 15,
-            background: '#eee',
-            width: 300,
-            marginBottom: 10,
-            border: '1px solid #ddd'
-        },
-        header: {
-            marginBottom: 3,
-            marginTop: 0
-        },
-        zoneName: {
-            textDecoration: 'none'
-        },
-        detail: {
-            font: 12,
-            color: '#555'
-        }
-    },
     comments: {
         container: {
             padding: 12,
-            background: '#eee',
+            background: '#f9f9f9',
             border: '1px solid #ddd'
         },
         commentListItem: { listStyle: 'none' },
@@ -24757,7 +24736,7 @@ var CreateComment = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'well' },
+                null,
                 _react2.default.createElement(
                     'h3',
                     null,
@@ -24875,7 +24854,7 @@ var CreateZone = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'well' },
+                null,
                 _react2.default.createElement(
                     'h3',
                     null,
