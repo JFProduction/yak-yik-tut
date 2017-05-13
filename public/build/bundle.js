@@ -6712,16 +6712,35 @@ exports.default = {
             marginBottom: 10,
             border: '1px solid #ddd'
         },
+        containerHover: {
+            padding: 15,
+            background: '#f9f9f9',
+            marginBottom: 10,
+            border: '1px solid #ddd',
+            boxShadow: '0px 10px 10px -10px #333',
+            transform: 'scale(1.03)'
+        },
         header: {
             marginBottom: 3,
             marginTop: 0
         },
         zoneName: {
-            textDecoration: 'none'
+            color: '#ff5252'
         },
         detail: {
             font: 12,
             color: '#555'
+        },
+        deleteBtn: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#333'
+        },
+        deleteBtnHover: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#ff5252',
+            cursor: 'pointer'
         }
     },
     comments: {
@@ -10828,6 +10847,7 @@ var Zones = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
 
         _this.state = {
+            selected: 0,
             list: []
         };
         return _this;
@@ -10877,11 +10897,14 @@ var Zones = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this4 = this;
+
             var zoneItems = this.state.list.map(function (zone, i) {
+                var selected = i == _this4.state.selected;
                 return _react2.default.createElement(
                     'li',
                     { key: i, style: { listStyle: 'none' } },
-                    _react2.default.createElement(_presentation.ZoneInfo, { currentZone: zone })
+                    _react2.default.createElement(_presentation.ZoneInfo, { isSelected: selected, currentZone: zone })
                 );
             });
 
@@ -11040,26 +11063,55 @@ var ZoneInfo = function (_Component) {
     function ZoneInfo() {
         _classCallCheck(this, ZoneInfo);
 
-        return _possibleConstructorReturn(this, (ZoneInfo.__proto__ || Object.getPrototypeOf(ZoneInfo)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (ZoneInfo.__proto__ || Object.getPrototypeOf(ZoneInfo)).call(this));
+
+        _this.state = {
+            delBtnHover: false,
+            zoneHover: false
+        };
+        return _this;
     }
 
     _createClass(ZoneInfo, [{
+        key: 'delHover',
+        value: function delHover() {
+            this.setState({
+                delBtnHover: !this.state.delBtnHover
+            });
+        }
+    }, {
+        key: 'zoneHover',
+        value: function zoneHover() {
+            this.setState({
+                zoneHover: !this.state.zoneHover
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var zoneStyle = _styles2.default.zoneInfo;
             var zipCode = this.props.currentZone.zipCodes[0];
+            var title = this.props.isSelected ? _react2.default.createElement(
+                'a',
+                { style: zoneStyle.zoneName, href: '#' },
+                this.props.currentZone.name
+            ) : _react2.default.createElement(
+                'a',
+                { href: '#' },
+                this.props.currentZone.name
+            );
 
             return _react2.default.createElement(
                 'div',
-                { style: zoneStyle.container },
+                { style: !this.state.zoneHover ? zoneStyle.container : zoneStyle.containerHover,
+                    onMouseOver: this.zoneHover.bind(this), onMouseOut: this.zoneHover.bind(this) },
+                _react2.default.createElement('span', { onMouseOver: this.delHover.bind(this), onMouseOut: this.delHover.bind(this),
+                    className: 'glyphicon glyphicon-trash', title: "Delete Zone: " + this.props.currentZone.name,
+                    style: !this.state.delBtnHover ? zoneStyle.deleteBtn : zoneStyle.deleteBtnHover }),
                 _react2.default.createElement(
                     'h2',
                     { style: zoneStyle.header },
-                    _react2.default.createElement(
-                        'a',
-                        { style: zoneStyle.zoneName, href: '#' },
-                        this.props.currentZone.name
-                    )
+                    title
                 ),
                 _react2.default.createElement(
                     'span',

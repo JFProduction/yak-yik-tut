@@ -8,6 +8,7 @@ class Zones extends Component {
         super()
 
         this.state = {
+            selected: 0,
             list: []
         }
     }
@@ -47,9 +48,10 @@ class Zones extends Component {
 
     render() {
         const zoneItems = this.state.list.map((zone, i) => {
+            let selected = (i == this.state.selected)
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
-                    <ZoneInfo currentZone={ zone } />
+                    <ZoneInfo isSelected={ selected } currentZone={ zone } />
                 </li>
             )
         })
