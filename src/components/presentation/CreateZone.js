@@ -18,7 +18,9 @@ class CreateZone extends Component {
     }
 
     addZone() {
-        this.props.onCreate(this.state.zone)
+        let updateZone = Object.assign({}, this.state.zone)
+        updateZone.zipCodes = updateZone.zipCode.split(',')
+        this.props.onCreate(updateZone)
     }
 
     render() {

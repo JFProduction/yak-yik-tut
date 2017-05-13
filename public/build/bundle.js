@@ -10859,10 +10859,7 @@ var Zones = function (_Component) {
         value: function addZone(zone) {
             var _this3 = this;
 
-            var updateZone = Object.assign({}, zone);
-            updateZone.zipCodes = updateZone.zipCode.split(',');
-
-            _utils.APIManager.post('/api/zone', updateZone, function (err, response) {
+            _utils.APIManager.post('/api/zone', zone, function (err, response) {
                 if (err) {
                     alert('ERROR: ' + err.message);
                     console.log(err.message);
@@ -24847,7 +24844,9 @@ var CreateZone = function (_Component) {
     }, {
         key: 'addZone',
         value: function addZone() {
-            this.props.onCreate(this.state.zone);
+            var updateZone = Object.assign({}, this.state.zone);
+            updateZone.zipCodes = updateZone.zipCode.split(',');
+            this.props.onCreate(updateZone);
         }
     }, {
         key: 'render',
