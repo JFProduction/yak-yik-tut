@@ -45,6 +45,7 @@ module.exports = {
     },
 
     destroy: (id, callback) => {
+        console.log(id)
         Zone.findByIdAndRemove(id, (err) => {
             if (err) {
                 callback(err, null)

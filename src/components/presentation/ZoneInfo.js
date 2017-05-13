@@ -23,6 +23,15 @@ class ZoneInfo extends Component {
         })
     }
 
+    changeSelected(e) {
+        console.log(this.props.zoneIndex)
+        this.props.select(this.props.zoneIndex)
+    }
+
+    deleteZone(e) {
+        this.props.delete(this.props.zoneIndex)
+    }
+
     render() {
         const zoneStyle = styles.zoneInfo
         const zipCode = this.props.currentZone.zipCodes[0]
@@ -35,8 +44,9 @@ class ZoneInfo extends Component {
                     onMouseOver={ this.zoneHover.bind(this) } onMouseOut={ this.zoneHover.bind(this) }>
                 <span onMouseOver={ this.delHover.bind(this) } onMouseOut={ this.delHover.bind(this) } 
                     className="glyphicon glyphicon-trash" title={ "Delete Zone: " + this.props.currentZone.name }
-                    style={ !(this.state.delBtnHover) ? zoneStyle.deleteBtn : zoneStyle.deleteBtnHover }></span>
-                <h2 style={ zoneStyle.header }>
+                    style={ !(this.state.delBtnHover) ? styles.universal.deleteBtn : styles.universal.deleteBtnHover }
+                    onClick={ this.deleteZone.bind(this) }></span>
+                <h2 style={ zoneStyle.header } onClick={ this.changeSelected.bind(this) }>
                     { title }
                 </h2>
                 <span className={ zoneStyle.detail }>{ zipCode }</span><br />

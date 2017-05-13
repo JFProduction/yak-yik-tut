@@ -45,11 +45,36 @@ class Comments extends Component {
         })
     }
 
+    deleteComment(index) {
+        // for now i'll just let anyone delete comments
+        let comment = Object.assign({}, this.state.list[index])
+        APIManager.delete('/api/comment/' + comment['_id'], (err, result) => {
+            if (err) {
+                alert('ERROR: ' + err.message)
+                console.log(err.message)
+                return
+            }
+
+            if (result.status === 200) {
+                alert(comment.username + '\'s Comment was Deleted')
+                let updatedList = Object.assign([], this.state.list)
+                updatedList = updatedList.filter((item) => {
+                    return item['_id'] !== comment['_id']
+                })
+
+                this.setState({
+                    list: updatedList
+                })
+            }
+        })
+    }
+
     render() {
         const commentItems = this.state.list.map((comment, i) => {
             return (
                 <li key={ i }>
-                    <CommentInfo currentComment={ comment } /><hr />
+                    <CommentInfo commentIndex={ i } currentComment={ comment } 
+                        delete={ this.deleteComment.bind(this) } /><hr />
                 </li>
             )
         })

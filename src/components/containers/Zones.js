@@ -46,12 +46,43 @@ class Zones extends Component {
         })
     }
 
+    deleteZone(index) {
+        let zone = Object.assign({}, this.state.list[index])
+        console.log(zone['_id'])
+        APIManager.delete('/api/zone/' + zone['_id'], (err, result) => {
+            if (err) {
+                alert('ERROR: ' + err.message)
+                console.log(err.message)
+                return
+            }
+
+            if (result.status === 200) {
+                alert(zone.name + ' Deleted')
+                let updatedList = Object.assign([], this.state.list)
+                updatedList = updatedList.filter((item) => {
+                    return item['_id'] !== zone['_id']
+                })
+
+                this.setState({
+                    list: updatedList
+                })
+            }
+        })
+    }
+
+    selectZone(index) {
+        this.setState({
+            selected: index
+        })
+    }
+
     render() {
         const zoneItems = this.state.list.map((zone, i) => {
             let selected = (i == this.state.selected)
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
-                    <ZoneInfo isSelected={ selected } currentZone={ zone } />
+                    <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }
+                        select={ this.selectZone.bind(this) } delete={ this.deleteZone.bind(this) }/>
                 </li>
             )
         })

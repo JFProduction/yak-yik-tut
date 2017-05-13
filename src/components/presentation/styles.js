@@ -1,4 +1,17 @@
 export default {
+    universal: {
+        deleteBtn: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#333'
+        },
+        deleteBtnHover: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#ff5252',
+            cursor: 'pointer'
+        }
+    },
     zoneInfo: {
         container: { 
             padding: 15, 
@@ -24,17 +37,6 @@ export default {
         detail: {
             font: 12,
             color: '#555'
-        },
-        deleteBtn: {
-            display: 'inline-block',
-            float: 'right',
-            color: '#333'
-        },
-        deleteBtnHover: {
-            display: 'inline-block',
-            float: 'right',
-            color: '#ff5252',
-            cursor: 'pointer'
         }
     },
     comments: {

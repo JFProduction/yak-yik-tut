@@ -6705,6 +6705,19 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
+    universal: {
+        deleteBtn: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#333'
+        },
+        deleteBtnHover: {
+            display: 'inline-block',
+            float: 'right',
+            color: '#ff5252',
+            cursor: 'pointer'
+        }
+    },
     zoneInfo: {
         container: {
             padding: 15,
@@ -6730,17 +6743,6 @@ exports.default = {
         detail: {
             font: 12,
             color: '#555'
-        },
-        deleteBtn: {
-            display: 'inline-block',
-            float: 'right',
-            color: '#333'
-        },
-        deleteBtnHover: {
-            display: 'inline-block',
-            float: 'right',
-            color: '#ff5252',
-            cursor: 'pointer'
         }
     },
     comments: {
@@ -10767,13 +10769,43 @@ var Comments = function (_Component) {
             });
         }
     }, {
+        key: 'deleteComment',
+        value: function deleteComment(index) {
+            var _this4 = this;
+
+            // for now i'll just let anyone delete comments
+            var comment = Object.assign({}, this.state.list[index]);
+            _utils.APIManager.delete('/api/comment/' + comment['_id'], function (err, result) {
+                if (err) {
+                    alert('ERROR: ' + err.message);
+                    console.log(err.message);
+                    return;
+                }
+
+                if (result.status === 200) {
+                    alert(comment.username + '\'s Comment was Deleted');
+                    var updatedList = Object.assign([], _this4.state.list);
+                    updatedList = updatedList.filter(function (item) {
+                        return item['_id'] !== comment['_id'];
+                    });
+
+                    _this4.setState({
+                        list: updatedList
+                    });
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this5 = this;
+
             var commentItems = this.state.list.map(function (comment, i) {
                 return _react2.default.createElement(
                     'li',
                     { key: i },
-                    _react2.default.createElement(_presentation.CommentInfo, { currentComment: comment }),
+                    _react2.default.createElement(_presentation.CommentInfo, { commentIndex: i, currentComment: comment,
+                        'delete': _this5.deleteComment.bind(_this5) }),
                     _react2.default.createElement('hr', null)
                 );
             });
@@ -10895,16 +10927,51 @@ var Zones = function (_Component) {
             });
         }
     }, {
-        key: 'render',
-        value: function render() {
+        key: 'deleteZone',
+        value: function deleteZone(index) {
             var _this4 = this;
 
+            var zone = Object.assign({}, this.state.list[index]);
+            console.log(zone['_id']);
+            _utils.APIManager.delete('/api/zone/' + zone['_id'], function (err, result) {
+                if (err) {
+                    alert('ERROR: ' + err.message);
+                    console.log(err.message);
+                    return;
+                }
+
+                if (result.status === 200) {
+                    alert(zone.name + ' Deleted');
+                    var updatedList = Object.assign([], _this4.state.list);
+                    updatedList = updatedList.filter(function (item) {
+                        return item['_id'] !== zone['_id'];
+                    });
+
+                    _this4.setState({
+                        list: updatedList
+                    });
+                }
+            });
+        }
+    }, {
+        key: 'selectZone',
+        value: function selectZone(index) {
+            this.setState({
+                selected: index
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this5 = this;
+
             var zoneItems = this.state.list.map(function (zone, i) {
-                var selected = i == _this4.state.selected;
+                var selected = i == _this5.state.selected;
                 return _react2.default.createElement(
                     'li',
                     { key: i, style: { listStyle: 'none' } },
-                    _react2.default.createElement(_presentation.ZoneInfo, { isSelected: selected, currentZone: zone })
+                    _react2.default.createElement(_presentation.ZoneInfo, { isSelected: selected, currentZone: zone, zoneIndex: i,
+                        select: _this5.selectZone.bind(_this5), 'delete': _this5.deleteZone.bind(_this5) })
                 );
             });
 
@@ -10989,16 +11056,37 @@ var CommentInfo = function (_Component) {
     function CommentInfo() {
         _classCallCheck(this, CommentInfo);
 
-        return _possibleConstructorReturn(this, (CommentInfo.__proto__ || Object.getPrototypeOf(CommentInfo)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (CommentInfo.__proto__ || Object.getPrototypeOf(CommentInfo)).call(this));
+
+        _this.state = {
+            delBtnHover: false
+        };
+        return _this;
     }
 
     _createClass(CommentInfo, [{
+        key: 'delHover',
+        value: function delHover() {
+            this.setState({
+                delBtnHover: !this.state.delBtnHover
+            });
+        }
+    }, {
+        key: 'deleteZone',
+        value: function deleteZone(e) {
+            this.props.delete(this.props.commentIndex);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var commentStyle = _styles2.default.comments;
             return _react2.default.createElement(
                 'div',
                 { style: commentStyle.infoContainer },
+                _react2.default.createElement('span', { onMouseOver: this.delHover.bind(this), onMouseOut: this.delHover.bind(this),
+                    className: 'glyphicon glyphicon-trash', title: "Delete Comment",
+                    style: !this.state.delBtnHover ? _styles2.default.universal.deleteBtn : _styles2.default.universal.deleteBtnHover,
+                    onClick: this.deleteZone.bind(this) }),
                 _react2.default.createElement(
                     'p',
                     { style: commentStyle.bodyWrapper },
@@ -11087,6 +11175,17 @@ var ZoneInfo = function (_Component) {
             });
         }
     }, {
+        key: 'changeSelected',
+        value: function changeSelected(e) {
+            console.log(this.props.zoneIndex);
+            this.props.select(this.props.zoneIndex);
+        }
+    }, {
+        key: 'deleteZone',
+        value: function deleteZone(e) {
+            this.props.delete(this.props.zoneIndex);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var zoneStyle = _styles2.default.zoneInfo;
@@ -11107,10 +11206,11 @@ var ZoneInfo = function (_Component) {
                     onMouseOver: this.zoneHover.bind(this), onMouseOut: this.zoneHover.bind(this) },
                 _react2.default.createElement('span', { onMouseOver: this.delHover.bind(this), onMouseOut: this.delHover.bind(this),
                     className: 'glyphicon glyphicon-trash', title: "Delete Zone: " + this.props.currentZone.name,
-                    style: !this.state.delBtnHover ? zoneStyle.deleteBtn : zoneStyle.deleteBtnHover }),
+                    style: !this.state.delBtnHover ? _styles2.default.universal.deleteBtn : _styles2.default.universal.deleteBtnHover,
+                    onClick: this.deleteZone.bind(this) }),
                 _react2.default.createElement(
                     'h2',
-                    { style: zoneStyle.header },
+                    { style: zoneStyle.header, onClick: this.changeSelected.bind(this) },
                     title
                 ),
                 _react2.default.createElement(
@@ -24703,7 +24803,22 @@ exports.default = {
 
     put: function put() {},
 
-    delete: function _delete() {}
+    delete: function _delete(url, callback) {
+        _superagent2.default.del(url).send(null).end(function (err, response) {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            var status = response.body.status;
+            if (status !== 200) {
+                callback({ message: response.body.message }, null);
+                return;
+            }
+
+            callback(null, response.body);
+        });
+    }
 };
 
 /***/ }),
