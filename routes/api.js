@@ -8,7 +8,7 @@ router.get('/:resource', (req, res, next) => {
     if (controller == null) {
         res.json({
             status: 500,
-            msg: 'Invalid Resource Request: ' + resource 
+            message: 'Invalid Resource Request: ' + resource 
         })
         return
     }
@@ -17,7 +17,7 @@ router.get('/:resource', (req, res, next) => {
         if (err) {
             res.json({
                 status: 500,
-                msg: err
+                message: err
             })
             return
         }
@@ -36,7 +36,7 @@ router.get('/:resource/:id', (req, res, next) => {
     if (controller == null) {
         res.json({
             status: 500,
-            msg: 'Invalid Resource Request: ' + resource 
+            message: 'Invalid Resource Request: ' + resource 
         })
         return
     }
@@ -45,7 +45,7 @@ router.get('/:resource/:id', (req, res, next) => {
         if (err) {
             res.json({
                 status: 500,
-                msg: err
+                message: err
             })
             return
         }
@@ -63,7 +63,7 @@ router.post('/:resource', (req, res, next) => {
     if (controller == null) {
         res.json({
             status: 500,
-            msg: 'Invalid Resource Request: ' + resource 
+            message: 'Invalid Resource Request: ' + resource 
         })
         return
     }
@@ -72,7 +72,7 @@ router.post('/:resource', (req, res, next) => {
         if (err) {
             res.json({
                 status: 500,
-                msg: err
+                message: err
             })
             return
         }
@@ -91,7 +91,7 @@ router.delete('/:resource', (req, res, next) => {
     if (controller == null) {
         res.json({
             status: 500,
-            msg: 'Invalid Resource Request: ' + resource 
+            message: 'Invalid Resource Request: ' + resource 
         })
         return
     }
@@ -100,7 +100,7 @@ router.delete('/:resource', (req, res, next) => {
         if (err) {
             res.json({
                 status: 500,
-                msg: err
+                message: err
             })
             return
         }

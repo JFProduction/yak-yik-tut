@@ -1,40 +1,32 @@
 import React, { Component } from 'react'
 import CommentInfo from '../presentation/CommentInfo'
 import styles from './styles'
-import superagent from 'superagent'
+import { APIManager } from '../../utils'
 
 class Comments extends Component {
     constructor() {
         super()
 
         this.state = {
-            list: [],
-            comment: {
-                username: '',
-                body: '',
-                timestamp: ''
-            }
+            comment: { username: '', body: '', timestamp: '' },
+            list: []
         }
     }
 
     // will run everytime we render 
     // the comments container
     componentDidMount() {
-        superagent.get('/api/comment')
-            .query(null)
-            .set('Accept', 'application/json')
-            .end((err, result) => {
-                if (err) {
-                    alert('ERROR: ', err)
-                    console.log(err)
-                    return
-                }
+        APIManager.get('/api/comment', null, (err, response) => {
+            if (err) {
+                alert('ERROR: ', err.message)
+                console.log(err.message)
+                return
+            }
 
-                let results = result.body.results
-                this.setState({
-                    list: results
-                })
+            this.setState({
+                list: response.results
             })
+        })
     }
 
     submitComment() {
@@ -71,7 +63,6 @@ class Comments extends Component {
                     <ul style={ styles.comments.commentListItem }>
                         { commentItems }
                     </ul>
-
                     <input id="username" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Username" /><br />
                     <input id="body" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Comment" /><br />
                     <input id="timestamp" onChange={ this.updateComment.bind(this) } className="form-control" type="text" placeholder="Timestamp" /><br />
