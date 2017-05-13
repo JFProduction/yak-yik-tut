@@ -1,24 +1,40 @@
 import React, { Component } from 'react'
 import CommentInfo from '../presentation/CommentInfo'
 import styles from './styles'
+import superagent from 'superagent'
 
 class Comments extends Component {
     constructor() {
         super()
 
         this.state = {
-            list: [
-                { body: 'Hello worlds', username: 'jimmyfargo', timestamp: '05/11/2017 10:30PM' },
-                { body: 'Something', username: 'billy', timestamp: '05/11/2017 10:40PM' },
-                { body: 'This is new', username: 'bobby', timestamp: '05/12/2017 09:24AM' },
-                { body: 'Again, hello worlds!', username: 'fred', timestamp: '05/15/2017 11:03AM' }
-            ],
+            list: [],
             comment: {
                 username: '',
                 body: '',
                 timestamp: ''
             }
         }
+    }
+
+    // will run everytime we render 
+    // the comments container
+    componentDidMount() {
+        superagent.get('/api/comment')
+            .query(null)
+            .set('Accept', 'application/json')
+            .end((err, result) => {
+                if (err) {
+                    alert('ERROR: ', err)
+                    console.log(err)
+                    return
+                }
+
+                let results = result.body.results
+                this.setState({
+                    list: results
+                })
+            })
     }
 
     submitComment() {
