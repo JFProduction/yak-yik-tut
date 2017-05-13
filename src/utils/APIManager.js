@@ -21,14 +21,30 @@ export default {
             })
     },
 
-    post: () => {
+    post: (url, body, callback) => {
+        superagent.post(url)
+            .send(body)
+            .set('Accept', 'application/json')
+            .end((err, response) => {
+                if (err) {
+                    callback(err, null)
+                    return
+                }
 
+                const status = response.body.status
+                if (status !== 200) {
+                    callback({ message: response.body.message }, null)
+                    return
+                }
+
+                callback(null, response.body)
+            })
     },
 
     put: () => {
 
     },
-    
+
     delete: () => {
 
     }

@@ -10705,7 +10705,7 @@ var Comments = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
 
         _this.state = {
-            comment: { username: '', body: '', timestamp: '' },
+            comment: { username: '', body: '' },
             list: []
         };
         return _this;
@@ -10733,13 +10733,23 @@ var Comments = function (_Component) {
             });
         }
     }, {
-        key: 'submitComment',
-        value: function submitComment() {
-            var updatedList = Object.assign([], this.state.list);
-            updatedList.push(this.state.comment);
+        key: 'addComment',
+        value: function addComment() {
+            var _this3 = this;
 
-            this.setState({
-                list: updatedList
+            _utils.APIManager.post('/api/comment', this.state.comment, function (err, response) {
+                if (err) {
+                    alert('ERROR: ' + err.message);
+                    console.log(err.message);
+                    return;
+                }
+
+                var updatedList = Object.assign([], _this3.state.list);
+                updatedList.push(response.result);
+
+                _this3.setState({
+                    list: updatedList
+                });
             });
         }
     }, {
@@ -10783,11 +10793,9 @@ var Comments = function (_Component) {
                     _react2.default.createElement('br', null),
                     _react2.default.createElement('input', { id: 'body', onChange: this.updateComment.bind(this), className: 'form-control', type: 'text', placeholder: 'Comment' }),
                     _react2.default.createElement('br', null),
-                    _react2.default.createElement('input', { id: 'timestamp', onChange: this.updateComment.bind(this), className: 'form-control', type: 'text', placeholder: 'Timestamp' }),
-                    _react2.default.createElement('br', null),
                     _react2.default.createElement(
                         'button',
-                        { className: 'btn btn-info', onClick: this.submitComment.bind(this) },
+                        { className: 'btn btn-info', onClick: this.addComment.bind(this) },
                         'Submit Comment'
                     )
                 )
@@ -10820,6 +10828,10 @@ var _react2 = _interopRequireDefault(_react);
 var _ZoneInfo = __webpack_require__(91);
 
 var _ZoneInfo2 = _interopRequireDefault(_ZoneInfo);
+
+var _styles = __webpack_require__(89);
+
+var _styles2 = _interopRequireDefault(_styles);
 
 var _utils = __webpack_require__(198);
 
@@ -10857,7 +10869,7 @@ var Zones = function (_Component) {
 
             _utils.APIManager.get('/api/zone', null, function (err, response) {
                 if (err) {
-                    alert('ERROR: ', err.message);
+                    alert('ERROR: ' + err.message);
                     console.log(err.message);
                     return;
                 }
@@ -10870,11 +10882,24 @@ var Zones = function (_Component) {
     }, {
         key: 'addZone',
         value: function addZone() {
-            var updatedList = Object.assign([], this.state.list);
-            updatedList.push(this.state.zone);
+            var _this3 = this;
 
-            this.setState({
-                list: updatedList
+            var updateZone = Object.assign({}, this.state.zone);
+            updateZone.zipCodes = updateZone.zipCode.split(',');
+
+            _utils.APIManager.post('/api/zone', updateZone, function (err, response) {
+                if (err) {
+                    alert('ERROR: ' + err.message);
+                    console.log(err.message);
+                    return;
+                }
+
+                var updatedList = Object.assign([], _this3.state.list);
+                updatedList.push(response.result);
+
+                _this3.setState({
+                    list: updatedList
+                });
             });
         }
     }, {
@@ -10882,12 +10907,7 @@ var Zones = function (_Component) {
         value: function updateZone(e) {
             var updatedZone = Object.assign({}, this.state.zone);
             var id = e.target.id;
-
-            if (id === 'zipCode') {
-                updatedZone[e.target.id] = [e.target.value];
-            } else {
-                updatedZone[e.target.id] = e.target.value;
-            }
+            updatedZone[e.target.id] = e.target.value;
 
             this.setState({
                 zone: updatedZone
@@ -24680,7 +24700,22 @@ exports.default = {
         });
     },
 
-    post: function post() {},
+    post: function post(url, body, callback) {
+        _superagent2.default.post(url).send(body).set('Accept', 'application/json').end(function (err, response) {
+            if (err) {
+                callback(err, null);
+                return;
+            }
+
+            var status = response.body.status;
+            if (status !== 200) {
+                callback({ message: response.body.message }, null);
+                return;
+            }
+
+            callback(null, response.body);
+        });
+    },
 
     put: function put() {},
 

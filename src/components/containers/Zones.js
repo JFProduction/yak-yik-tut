@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ZoneInfo from '../presentation/ZoneInfo'
+import styles from './styles'
 import { APIManager } from '../../utils'
 
 class Zones extends Component {
@@ -17,11 +18,11 @@ class Zones extends Component {
     componentDidMount() {
         APIManager.get('/api/zone', null, (err, response) => {
             if (err) {
-                alert('ERROR: ', err.message)
+                alert('ERROR: ' + err.message)
                 console.log(err.message)
                 return
             }
-            
+
             this.setState({
                 list: response.results
             })
@@ -29,23 +30,29 @@ class Zones extends Component {
     }
 
     addZone() {
-        let updatedList = Object.assign([], this.state.list)
-        updatedList.push(this.state.zone)
+        let updateZone = Object.assign({}, this.state.zone)
+        updateZone.zipCodes = updateZone.zipCode.split(',')
 
-        this.setState({
-            list: updatedList
+        APIManager.post('/api/zone', updateZone, (err, response) => {
+            if (err) {
+                alert('ERROR: ' + err.message)
+                console.log(err.message)
+                return
+            }
+
+            let updatedList = Object.assign([], this.state.list)
+            updatedList.push(response.result)
+
+            this.setState({
+                list: updatedList
+            })
         })
     }
 
     updateZone(e) {
         let updatedZone = Object.assign({}, this.state.zone)
         let id = e.target.id
-
-        if (id === 'zipCode') {
-            updatedZone[e.target.id] = [e.target.value]
-        } else {
-            updatedZone[e.target.id] = e.target.value
-        }
+        updatedZone[e.target.id] = e.target.value
 
         this.setState({
             zone: updatedZone
