@@ -10980,7 +10980,7 @@ var Zones = function (_Component) {
                 null,
                 _react2.default.createElement(
                     'ol',
-                    null,
+                    { style: { paddingLeft: 0 } },
                     zoneItems
                 ),
                 _react2.default.createElement(_presentation.CreateZone, { onCreate: this.addZone.bind(this) })

@@ -89,7 +89,7 @@ class Zones extends Component {
 
         return (
             <div>
-                <ol>
+                <ol style={{ paddingLeft: 0 }}>
                     { zoneItems }
                 </ol>
 
