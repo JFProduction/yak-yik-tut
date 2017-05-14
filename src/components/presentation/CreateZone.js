@@ -29,7 +29,9 @@ class CreateZone extends Component {
                 <h3>Create Zone</h3>
                 <input onChange={ this.updateZone.bind(this) } id="name" className="form-control" type="text" placeholder="Name" /><br />
                 <input onChange={ this.updateZone.bind(this) } id="zipCode" className="form-control" type="text" placeholder="Zip Code" /><br />
-                <button onClick={ this.addZone.bind(this) } className="btn btn-danger">Submit Zone</button>
+                <button onClick={ this.addZone.bind(this) } 
+                    disabled={ !this.state.zone.name || !this.state.zone.zipCode } 
+                    className="btn btn-danger">Submit Zone</button>
             </div>
         )
     }

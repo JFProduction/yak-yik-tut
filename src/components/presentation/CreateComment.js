@@ -28,7 +28,9 @@ class CreateComment extends Component {
                 <h3>Create Comment</h3>
                 <input onChange={ this.updateComment.bind(this) } id="username" className="form-control" type="text" placeholder="Username" /><br />
                 <input onChange={ this.updateComment.bind(this) } id="body" className="form-control" type="text" placeholder="Comment" /><br />
-                <button onClick={ this.addComment.bind(this) } className="btn btn-info">Submit Comment</button>
+                <button onClick={ this.addComment.bind(this) } 
+                    disabled={ !this.state.comment.body || !this.state.comment.username }
+                    className="btn btn-info">Submit Comment</button>
             </div>
         )
     }

@@ -24912,7 +24912,9 @@ var CreateComment = function (_Component) {
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.addComment.bind(this), className: 'btn btn-info' },
+                    { onClick: this.addComment.bind(this),
+                        disabled: !this.state.comment.body || !this.state.comment.username,
+                        className: 'btn btn-info' },
                     'Submit Comment'
                 )
             );
@@ -25032,7 +25034,9 @@ var CreateZone = function (_Component) {
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.addZone.bind(this), className: 'btn btn-danger' },
+                    { onClick: this.addZone.bind(this),
+                        disabled: !this.state.zone.name || !this.state.zone.zipCode,
+                        className: 'btn btn-danger' },
                     'Submit Zone'
                 )
             );
