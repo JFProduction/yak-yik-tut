@@ -15,6 +15,11 @@ const ZoneReducer = (state={}, actions) => {
             updatedState.zones.push(actions.payload)
             break
         }
+        case 'DEL_ZONE' : {
+            updatedState.zones = updatedState.zones.filter((zone) => {
+                return zone['_id'] !== actions.payload['_id']
+            })
+        }
     }
     return updatedState
 }

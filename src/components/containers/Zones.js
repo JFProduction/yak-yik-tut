@@ -49,6 +49,7 @@ class Zones extends Component {
             this.setState({
                 list: updatedList
             })
+            store.dispatch({ type: 'ADD_ZONE', payload: response.result })
         })
     }
 
@@ -71,6 +72,7 @@ class Zones extends Component {
                 this.setState({
                     list: updatedList
                 })
+                store.dispatch({ type: 'DEL_ZONE', payload: zone })
             }
         })
     }
