@@ -15,7 +15,7 @@ describe('get an array of zones', function() {
 })
 
 function getZoneById(id) {
-    describe('using id ' + id + ' to get a zone', function() {
+    describe('using id ' + id + ' to get a specific zone', function() {
         it('should get first zone for the name', function(done) {
             request.get({ url: 'http://localhost:3000/api/zone/' + id },
                 (err, resp, body) => {
