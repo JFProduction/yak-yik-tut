@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
+import store from '../../store/StoreFactory'
 
 class Zones extends Component {
     constructor() {
@@ -11,6 +12,9 @@ class Zones extends Component {
             selected: 0,
             list: []
         }
+        store.subscribe(() => {
+            console.log('store changed', store.getState())
+        })
     }
 
     // will run everytime we render 
@@ -26,6 +30,8 @@ class Zones extends Component {
             this.setState({
                 list: response.results
             })
+
+            store.dispatch({ type: 'INIT_ZONES', payload: this.state.list })
         })
     }
 
@@ -48,7 +54,6 @@ class Zones extends Component {
 
     deleteZone(index) {
         let zone = Object.assign({}, this.state.list[index])
-        console.log(zone['_id'])
         APIManager.delete('/api/zone/' + zone['_id'], (err, result) => {
             if (err) {
                 alert('ERROR: ' + err.message)
@@ -74,6 +79,7 @@ class Zones extends Component {
         this.setState({
             selected: index
         })
+        store.dispatch({ type: 'SELECTED_ZONE', payload: index })
     }
 
     render() {

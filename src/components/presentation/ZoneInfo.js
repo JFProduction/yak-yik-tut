@@ -24,6 +24,7 @@ class ZoneInfo extends Component {
     }
 
     changeSelected(e) {
+        e.preventDefault()
         console.log(this.props.zoneIndex)
         this.props.select(this.props.zoneIndex)
     }
