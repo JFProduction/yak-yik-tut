@@ -1,6 +1,9 @@
-import { combineReducers, createStore } from 'redux'
-
-const CommentReducer = (state={}, actions) => {
+const CommentReducer = (state={
+    comments: [],
+    fetching: false,
+    fetched: false,
+    error: null
+}, actions) => {
     return state
 }
 

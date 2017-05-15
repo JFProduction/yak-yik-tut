@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
-import store from '../../store/StoreFactory'
+import store from '../../stores/StoreFactory'
 
 class Zones extends Component {
     constructor() {
@@ -84,7 +84,7 @@ class Zones extends Component {
 
     render() {
         const zoneItems = this.state.list.map((zone, i) => {
-            let selected = (i == this.state.selected)
+            let selected = (i === this.state.selected)
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
                     <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }

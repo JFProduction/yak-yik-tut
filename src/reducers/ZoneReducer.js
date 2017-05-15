@@ -1,6 +1,10 @@
-import { combineReducers, createStore } from 'redux'
-
-const ZoneReducer = (state={}, actions) => {
+const ZoneReducer = (state={
+    zones: [],
+    selectedZone: 0,
+    fetching: false,
+    fetched: false,
+    error: null
+}, actions) => {
     let updatedState = Object.assign({}, state)
     switch (actions.type) {
         case 'INIT_ZONES': {
