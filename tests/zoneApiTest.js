@@ -16,12 +16,12 @@ describe('get an array of zones', function() {
 
 function getZoneById(id) {
     describe('using id ' + id + ' to get a zone', function() {
-        it('should get first zone for the name', function(done) {
+        it('should get USF for the name', function(done) {
             request.get({ url: 'http://localhost:3000/api/zone/' + id },
                 (err, resp, body) => {
                     let zone = JSON.parse(body)
                     expect(zone.status).to.equal(200)
-                    expect(zone.result.name).to.equal('first zone')
+                    expect(zone.result.name).to.equal('USF')
                     done()
                 })
         })

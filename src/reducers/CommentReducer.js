@@ -1,9 +1,11 @@
-const CommentReducer = (state={
+const initialState = {
     comments: [],
     fetching: false,
     fetched: false,
     error: null
-}, actions) => {
+}
+
+const CommentReducer = (state=initialState, actions) => {
     return state
 }
 

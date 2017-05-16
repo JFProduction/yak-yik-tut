@@ -3,6 +3,7 @@ import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
 import store from '../../stores/Store'
+import { addZone, delZone, initZones } from '../../actions/ZoneActions'
 
 class Zones extends Component {
     constructor() {
@@ -31,7 +32,7 @@ class Zones extends Component {
                 list: response.results
             })
 
-            store.dispatch({ type: 'INIT_ZONES', payload: this.state.list })
+            store.dispatch(initZones(response.results))
         })
     }
 
@@ -49,7 +50,7 @@ class Zones extends Component {
             this.setState({
                 list: updatedList
             })
-            store.dispatch({ type: 'ADD_ZONE', payload: response.result })
+            store.dispatch(addZone(response.result))
         })
     }
 
@@ -72,7 +73,7 @@ class Zones extends Component {
                 this.setState({
                     list: updatedList
                 })
-                store.dispatch({ type: 'DEL_ZONE', payload: zone })
+                store.dispatch(delZone(zone))
             }
         })
     }

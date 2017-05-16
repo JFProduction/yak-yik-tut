@@ -1,10 +1,6 @@
 import {  createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
 import reducers from '../reducers'
-
-const logger = (store) => (next) => (actions) => {
-    console.log('action fired', actions)
-    next(actions)
-}
 
 const middleware = applyMiddleware(logger)
 
