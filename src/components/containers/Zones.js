@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
-import store from '../../stores/StoreFactory'
+import store from '../../stores/Store'
 
 class Zones extends Component {
     constructor() {

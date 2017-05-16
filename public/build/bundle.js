@@ -7362,12 +7362,7 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/jimmyfargo/Dev/nodeStuff/yikYak/yak-yik/src/stores/StoreFactory.js'");
-
-/***/ }),
+/* 63 */,
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12745,9 +12740,9 @@ var _styles2 = _interopRequireDefault(_styles);
 
 var _utils = __webpack_require__(67);
 
-var _StoreFactory = __webpack_require__(63);
+var _Store = __webpack_require__(286);
 
-var _StoreFactory2 = _interopRequireDefault(_StoreFactory);
+var _Store2 = _interopRequireDefault(_Store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12769,8 +12764,8 @@ var Zones = function (_Component) {
             selected: 0,
             list: []
         };
-        _StoreFactory2.default.subscribe(function () {
-            console.log('store changed', _StoreFactory2.default.getState());
+        _Store2.default.subscribe(function () {
+            console.log('store changed', _Store2.default.getState());
         });
         return _this;
     }
@@ -12795,7 +12790,7 @@ var Zones = function (_Component) {
                     list: response.results
                 });
 
-                _StoreFactory2.default.dispatch({ type: 'INIT_ZONES', payload: _this2.state.list });
+                _Store2.default.dispatch({ type: 'INIT_ZONES', payload: _this2.state.list });
             });
         }
     }, {
@@ -12816,7 +12811,7 @@ var Zones = function (_Component) {
                 _this3.setState({
                     list: updatedList
                 });
-                _StoreFactory2.default.dispatch({ type: 'ADD_ZONE', payload: response.result });
+                _Store2.default.dispatch({ type: 'ADD_ZONE', payload: response.result });
             });
         }
     }, {
@@ -12842,7 +12837,7 @@ var Zones = function (_Component) {
                     _this4.setState({
                         list: updatedList
                     });
-                    _StoreFactory2.default.dispatch({ type: 'DEL_ZONE', payload: zone });
+                    _Store2.default.dispatch({ type: 'DEL_ZONE', payload: zone });
                 }
             });
         }
@@ -12852,7 +12847,7 @@ var Zones = function (_Component) {
             this.setState({
                 selected: index
             });
-            _StoreFactory2.default.dispatch({ type: 'SELECTED_ZONE', payload: index });
+            _Store2.default.dispatch({ type: 'SELECTED_ZONE', payload: index });
         }
     }, {
         key: 'render',
