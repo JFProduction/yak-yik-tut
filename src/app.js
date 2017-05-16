@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import Home from './components/layouts/Home'
-import store from './stores/StoreFactory'
+import store from './stores/Store'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class Nav extends Component {

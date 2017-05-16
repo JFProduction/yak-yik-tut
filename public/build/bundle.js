@@ -7363,35 +7363,9 @@ module.exports = isObject;
 
 /***/ }),
 /* 63 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(61);
-
-var _reducers = __webpack_require__(129);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var logger = function logger(store) {
-    return function (next) {
-        return function (actions) {
-            console.log('action fired', actions);
-            next(actions);
-        };
-    };
-};
-
-var middleware = (0, _redux.applyMiddleware)(logger);
-
-exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/jimmyfargo/Dev/nodeStuff/yikYak/yak-yik/src/stores/StoreFactory.js'");
 
 /***/ }),
 /* 64 */
@@ -12507,9 +12481,9 @@ var _Home = __webpack_require__(116);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _StoreFactory = __webpack_require__(63);
+var _Store = __webpack_require__(286);
 
-var _StoreFactory2 = _interopRequireDefault(_StoreFactory);
+var _Store2 = _interopRequireDefault(_Store);
 
 var _reactRouterDom = __webpack_require__(119);
 
@@ -12575,7 +12549,7 @@ var About = function About() {
 
 _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
-    { store: _StoreFactory2.default },
+    { store: _Store2.default },
     _react2.default.createElement(
         _reactRouterDom.BrowserRouter,
         null,
@@ -30859,6 +30833,38 @@ exports.cleanHeader = function(header, shouldStripCookie){
   }
   return header;
 };
+
+/***/ }),
+/* 286 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(61);
+
+var _reducers = __webpack_require__(129);
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var logger = function logger(store) {
+    return function (next) {
+        return function (actions) {
+            console.log('action fired', actions);
+            next(actions);
+        };
+    };
+};
+
+var middleware = (0, _redux.applyMiddleware)(logger);
+
+exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ })
 /******/ ]);
