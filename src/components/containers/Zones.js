@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
+import store from '../../stores/Store'
+import { addZone, delZone, initZones } from '../../actions/ZoneActions'
 
 class Zones extends Component {
     constructor() {
@@ -11,6 +13,9 @@ class Zones extends Component {
             selected: 0,
             list: []
         }
+        store.subscribe(() => {
+            console.log('store changed', store.getState())
+        })
     }
 
     // will run everytime we render 
@@ -26,6 +31,8 @@ class Zones extends Component {
             this.setState({
                 list: response.results
             })
+
+            store.dispatch(initZones(response.results))
         })
     }
 
@@ -43,12 +50,12 @@ class Zones extends Component {
             this.setState({
                 list: updatedList
             })
+            store.dispatch(addZone(response.result))
         })
     }
 
     deleteZone(index) {
         let zone = Object.assign({}, this.state.list[index])
-        console.log(zone['_id'])
         APIManager.delete('/api/zone/' + zone['_id'], (err, result) => {
             if (err) {
                 alert('ERROR: ' + err.message)
@@ -66,6 +73,7 @@ class Zones extends Component {
                 this.setState({
                     list: updatedList
                 })
+                store.dispatch(delZone(zone))
             }
         })
     }
@@ -74,11 +82,12 @@ class Zones extends Component {
         this.setState({
             selected: index
         })
+        store.dispatch({ type: 'SELECTED_ZONE', payload: index })
     }
 
     render() {
         const zoneItems = this.state.list.map((zone, i) => {
-            let selected = (i == this.state.selected)
+            let selected = (i === this.state.selected)
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
                     <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }
@@ -89,6 +98,7 @@ class Zones extends Component {
 
         return (
             <div>
+                <h2>All Zones</h2>
                 <ol style={{ paddingLeft: 0 }}>
                     { zoneItems }
                 </ol>
