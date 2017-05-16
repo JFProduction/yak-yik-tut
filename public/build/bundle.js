@@ -12772,6 +12772,12 @@ var _Store2 = _interopRequireDefault(_Store);
 
 var _ZoneActions = __webpack_require__(292);
 
+var _ZoneActions2 = _interopRequireDefault(_ZoneActions);
+
+var _reactRedux = __webpack_require__(118);
+
+var _redux = __webpack_require__(61);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12786,24 +12792,14 @@ var Zones = function (_Component) {
     function Zones() {
         _classCallCheck(this, Zones);
 
-        var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
-
-        _this.state = {
-            selected: 0,
-            list: []
-        };
-        _Store2.default.subscribe(function () {
-            console.log('store changed', _Store2.default.getState());
-        });
-        return _this;
+        return _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).apply(this, arguments));
     }
-
-    // will run everytime we render 
-    // the comments container
-
 
     _createClass(Zones, [{
         key: 'componentDidMount',
+
+        // will run everytime we render 
+        // the zones container
         value: function componentDidMount() {
             var _this2 = this;
 
@@ -12813,12 +12809,7 @@ var Zones = function (_Component) {
                     console.log(err.message);
                     return;
                 }
-
-                _this2.setState({
-                    list: response.results
-                });
-
-                _Store2.default.dispatch((0, _ZoneActions.initZones)(response.results));
+                _this2.props.initZones(response.results);
             });
         }
     }, {
@@ -12832,14 +12823,8 @@ var Zones = function (_Component) {
                     console.log(err.message);
                     return;
                 }
-
-                var updatedList = Object.assign([], _this3.state.list);
-                updatedList.push(response.result);
-
-                _this3.setState({
-                    list: updatedList
-                });
-                _Store2.default.dispatch((0, _ZoneActions.addZone)(response.result));
+                console.log(response.result);
+                _this3.props.addZone(response.result);
             });
         }
     }, {
@@ -12847,7 +12832,7 @@ var Zones = function (_Component) {
         value: function deleteZone(index) {
             var _this4 = this;
 
-            var zone = Object.assign({}, this.state.list[index]);
+            var zone = Object.assign({}, this.props.list[index]);
             _utils.APIManager.delete('/api/zone/' + zone['_id'], function (err, result) {
                 if (err) {
                     alert('ERROR: ' + err.message);
@@ -12857,33 +12842,22 @@ var Zones = function (_Component) {
 
                 if (result.status === 200) {
                     alert(zone.name + ' Deleted');
-                    var updatedList = Object.assign([], _this4.state.list);
-                    updatedList = updatedList.filter(function (item) {
-                        return item['_id'] !== zone['_id'];
-                    });
-
-                    _this4.setState({
-                        list: updatedList
-                    });
-                    _Store2.default.dispatch((0, _ZoneActions.delZone)(zone));
+                    _this4.props.deleteZone(zone);
                 }
             });
         }
     }, {
         key: 'selectZone',
         value: function selectZone(index) {
-            this.setState({
-                selected: index
-            });
-            _Store2.default.dispatch({ type: 'SELECTED_ZONE', payload: index });
+            this.props.selectZone(index);
         }
     }, {
         key: 'render',
         value: function render() {
             var _this5 = this;
 
-            var zoneItems = this.state.list.map(function (zone, i) {
-                var selected = i === _this5.state.selected;
+            var zoneItems = this.props.list.map(function (zone, i) {
+                var selected = i === _this5.props.selected;
                 return _react2.default.createElement(
                     'li',
                     { key: i, style: { listStyle: 'none' } },
@@ -12913,7 +12887,26 @@ var Zones = function (_Component) {
     return Zones;
 }(_react.Component);
 
-exports.default = Zones;
+function mapStateToProps(state) {
+    return {
+        list: state.ZoneReducer.zones,
+        selected: state.ZoneReducer.selectedZone
+    };
+}
+
+// this maps the dispatch services to the container's
+// props
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({
+        initZones: _ZoneActions2.default.initZones,
+        addZone: _ZoneActions2.default.addZone,
+        deleteZone: _ZoneActions2.default.deleteZone,
+        selectZone: _ZoneActions2.default.selectZone
+    }, dispatch);
+}
+
+// connects the redux layer to the zone's props
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Zones);
 
 /***/ }),
 /* 123 */
@@ -31782,10 +31775,17 @@ module.exports = {
         };
     },
 
-    delZone: function delZone(zone) {
+    deleteZone: function deleteZone(zone) {
         return {
             type: 'DEL_ZONE',
             payload: zone
+        };
+    },
+
+    selectZone: function selectZone(index) {
+        return {
+            type: 'SELECTED_ZONE',
+            payload: index
         };
     }
 };

@@ -13,10 +13,17 @@ module.exports = {
         }
     },
 
-    delZone: (zone) => {
+    deleteZone: (zone) => {
         return { 
             type: 'DEL_ZONE', 
             payload: zone
+        }
+    },
+
+    selectZone: (index) => {
+        return {
+            type: 'SELECTED_ZONE',
+            payload: index
         }
     }
 }

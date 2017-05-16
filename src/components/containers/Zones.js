@@ -3,23 +3,13 @@ import { ZoneInfo, CreateZone } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
 import store from '../../stores/Store'
-import { addZone, delZone, initZones } from '../../actions/ZoneActions'
+import actions from '../../actions/ZoneActions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class Zones extends Component {
-    constructor() {
-        super()
-
-        this.state = {
-            selected: 0,
-            list: []
-        }
-        store.subscribe(() => {
-            console.log('store changed', store.getState())
-        })
-    }
-
     // will run everytime we render 
-    // the comments container
+    // the zones container
     componentDidMount() {
         APIManager.get('/api/zone', null, (err, response) => {
             if (err) {
@@ -27,12 +17,7 @@ class Zones extends Component {
                 console.log(err.message)
                 return
             }
-
-            this.setState({
-                list: response.results
-            })
-
-            store.dispatch(initZones(response.results))
+            this.props.initZones(response.results)
         })
     }
 
@@ -43,19 +28,13 @@ class Zones extends Component {
                 console.log(err.message)
                 return
             }
-
-            let updatedList = Object.assign([], this.state.list)
-            updatedList.push(response.result)
-
-            this.setState({
-                list: updatedList
-            })
-            store.dispatch(addZone(response.result))
+            console.log(response.result)
+            this.props.addZone(response.result)
         })
     }
 
     deleteZone(index) {
-        let zone = Object.assign({}, this.state.list[index])
+        let zone = Object.assign({}, this.props.list[index])
         APIManager.delete('/api/zone/' + zone['_id'], (err, result) => {
             if (err) {
                 alert('ERROR: ' + err.message)
@@ -65,29 +44,18 @@ class Zones extends Component {
 
             if (result.status === 200) {
                 alert(zone.name + ' Deleted')
-                let updatedList = Object.assign([], this.state.list)
-                updatedList = updatedList.filter((item) => {
-                    return item['_id'] !== zone['_id']
-                })
-
-                this.setState({
-                    list: updatedList
-                })
-                store.dispatch(delZone(zone))
+                this.props.deleteZone(zone)
             }
         })
     }
 
     selectZone(index) {
-        this.setState({
-            selected: index
-        })
-        store.dispatch({ type: 'SELECTED_ZONE', payload: index })
+        this.props.selectZone(index)
     }
 
     render() {
-        const zoneItems = this.state.list.map((zone, i) => {
-            let selected = (i === this.state.selected)
+        const zoneItems = this.props.list.map((zone, i) => {
+            let selected = (i === this.props.selected)
             return (
                 <li key={ i } style={{ listStyle: 'none' }}>
                     <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }
@@ -109,4 +77,23 @@ class Zones extends Component {
     }
 }
 
-export default Zones
+function mapStateToProps(state) {
+    return {
+        list: state.ZoneReducer.zones,
+        selected: state.ZoneReducer.selectedZone
+    }
+}
+
+// this maps the dispatch services to the container's
+// props
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        initZones: actions.initZones,
+        addZone: actions.addZone,
+        deleteZone: actions.deleteZone,
+        selectZone: actions.selectZone
+    }, dispatch)
+}
+
+// connects the redux layer to the zone's props
+export default connect(mapStateToProps, mapDispatchToProps)(Zones)
