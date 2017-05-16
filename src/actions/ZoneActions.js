@@ -6,7 +6,7 @@ module.exports = {
         }
     },
 
-    addZone: (zone) => { 
+    addZone: (zone) => {
         return {
             type: 'ADD_ZONE', 
             payload: zone 

@@ -17,7 +17,10 @@ class Zones extends Component {
                 console.log(err.message)
                 return
             }
-            this.props.initZones(response.results)
+
+            if (response.status === 200) {
+                this.props.initZones(response.results)
+            }
         })
     }
 
@@ -28,8 +31,10 @@ class Zones extends Component {
                 console.log(err.message)
                 return
             }
-            console.log(response.result)
-            this.props.addZone(response.result)
+
+            if (response.status === 200) {
+                this.props.addZone(response.result)
+            }
         })
     }
 
@@ -54,15 +59,20 @@ class Zones extends Component {
     }
 
     render() {
-        const zoneItems = this.props.list.map((zone, i) => {
-            let selected = (i === this.props.selected)
-            return (
-                <li key={ i } style={{ listStyle: 'none' }}>
-                    <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }
-                        select={ this.selectZone.bind(this) } delete={ this.deleteZone.bind(this) }/>
-                </li>
-            )
-        })
+        let zoneItems
+        if (this.props.list.length) {
+            zoneItems = this.props.list.map((zone, i) => {
+                let selected = (i === this.props.selected)
+                return (
+                    <li key={ i } style={{ listStyle: 'none' }}>
+                        <ZoneInfo isSelected={ selected } currentZone={ zone } zoneIndex={ i }
+                            select={ this.selectZone.bind(this) } delete={ this.deleteZone.bind(this) }/>
+                    </li>
+                )
+            })
+        } else {
+            zoneItems = <h4>No Zones Yet... Try adding one!!</h4>
+        }
 
         return (
             <div>

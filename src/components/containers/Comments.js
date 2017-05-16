@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import { CommentInfo, CreateComment } from '../presentation'
 import styles from './styles'
 import { APIManager } from '../../utils'
+import store from '../../stores/Store'
+import actions from '../../actions/CommentActions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class Comments extends Component {
-    constructor() {
-        super()
-
-        this.state = {
-            list: []
-        }
-    }
-
     // will run everytime we render 
     // the comments container
     componentDidMount() {
@@ -21,10 +17,7 @@ class Comments extends Component {
                 console.log(err.message)
                 return
             }
-            
-            this.setState({
-                list: response.results
-            })
+            this.props.initComments(response.results)
         })
     }
 
@@ -35,19 +28,13 @@ class Comments extends Component {
                 console.log(err.message)
                 return
             }
-
-            let updatedList = Object.assign([], this.state.list)
-            updatedList.push(response.result)
-
-            this.setState({
-                list: updatedList
-            })
+            this.props.addComment(response.result)
         })
     }
 
     deleteComment(index) {
         // for now i'll just let anyone delete comments
-        let comment = Object.assign({}, this.state.list[index])
+        let comment = Object.assign({}, this.props.list[index])
         APIManager.delete('/api/comment/' + comment['_id'], (err, result) => {
             if (err) {
                 alert('ERROR: ' + err.message)
@@ -57,27 +44,26 @@ class Comments extends Component {
 
             if (result.status === 200) {
                 alert(comment.username + '\'s Comment was Deleted')
-                let updatedList = Object.assign([], this.state.list)
-                updatedList = updatedList.filter((item) => {
-                    return item['_id'] !== comment['_id']
-                })
-
-                this.setState({
-                    list: updatedList
-                })
+                this.props.deleteComment(comment)
             }
         })
     }
 
     render() {
-        const commentItems = this.state.list.map((comment, i) => {
-            return (
-                <li key={ i }>
-                    <CommentInfo commentIndex={ i } currentComment={ comment } 
-                        delete={ this.deleteComment.bind(this) } /><hr />
-                </li>
-            )
-        })
+        let commentItems
+
+        if (this.props.list.length) {
+            commentItems = this.props.list.map((comment, i) => {
+                return (
+                    <li key={ i }>
+                        <CommentInfo commentIndex={ i } currentComment={ comment } 
+                            delete={ this.deleteComment.bind(this) } /><hr />
+                    </li>
+                )
+            })
+        } else {
+            commentItems = <h4>No Comments for the Zone Selected... Try creating one!!</h4>
+        }
 
         return (
             <div className="col-md-12">
@@ -94,4 +80,18 @@ class Comments extends Component {
     }
 }
 
-export default Comments
+function mapStateToProps(state) {
+    return {
+        list: state.CommentReducer.comments
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        initComments: actions.initComments,
+        deleteComment: actions.deleteComment,
+        addComment: actions.addComment
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comments)

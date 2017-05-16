@@ -5,7 +5,7 @@ export default {
             background: '#f9f9f9', 
             border: '1px solid #ddd'
         },
-        commentListItem: { listStyle: 'none' },
+        commentListItem: { listStyle: 'none', paddingLeft: 5 },
         infoContainer: { marginBottom: 15 },
         bodyWrapper: { 
             fontSize: 20, 
