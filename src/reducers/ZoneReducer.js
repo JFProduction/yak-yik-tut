@@ -1,26 +1,33 @@
-const ZoneReducer = (state={
+const initialState = {
     zones: [],
     selectedZone: 0,
     fetching: false,
     fetched: false,
     error: null
-}, actions) => {
-    let updatedState = Object.assign({}, state)
+}
+
+const ZoneReducer = (state=initialState, actions) => {
+    let newState = Object.assign({}, state)
     switch (actions.type) {
         case 'INIT_ZONES': {
-            updatedState.zones = actions.payload
+            newState.zones = actions.payload
             break
         }
         case 'SELECTED_ZONE': {
-            updatedState.selectedZone = actions.payload
+            newState.selectedZone = actions.payload
             break
         }
         case 'ADD_ZONE': {
-            updatedState.zones.push(actions.payload)
+            newState.zones.push(actions.payload)
             break
         }
+        case 'DEL_ZONE' : {
+            newState.zones = newState.zones.filter((zone) => {
+                return zone['_id'] !== actions.payload['_id']
+            })
+        }
     }
-    return updatedState
+    return newState
 }
 
 export default ZoneReducer
